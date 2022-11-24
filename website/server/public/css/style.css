@@ -1,0 +1,227 @@
+/* CSS Document */
+body{
+    margin:0px;
+    padding:0px;
+    font-family: myriad pro;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+/* main background theme */
+.main{
+    width:100%;
+    height: 20vh ;
+    background-image: url("../images/product bg.png");
+    background-position: center;
+	position: relative;
+}
+
+.H_main{
+    height: 20vh ;
+    background-size: 800px;
+    background-position: center; 
+	position: relative;
+}
+
+.logo{
+	position:absolute;
+	left:150px;
+	top:50px;
+} 
+
+/*---search bar---*/
+.side-box{
+    position: absolute;
+    left: 30%;
+    top:50px;
+    width: 550px;
+    height: 50px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	/* border-radius: 10% 10% 10% 10%/50% 50% 50% 50%; */
+	border-radius: 10% 10% 10% 10%/100% 100% 100% 100%;
+    box-shadow: 0 0 20px 9px rgba(167,158,245,0.2);
+    border:1px solid rgba(167,158,245,0.2);
+}
+
+.search input{
+    width:350px;
+    height: 20px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #1f1f1f;
+    font-size: 1rem;
+    padding: 0px 10px;
+}
+
+.search input:placeholder{
+    color: #1d1d1d;
+    font-weight: 400;
+    font-size: 0.8rem;
+    font-family: poppins;
+}
+
+.search i{
+    margin:50px auto;
+}
+
+#ur {
+	color: #a72020;
+}
+
+/* products within all pages */
+.product{
+	width:85%;
+	background-color: #FFFFFF;
+	box-shadow: 2px 2px 30px rgba(167,158,245,0.2);
+	margin:10px auto;
+	padding: 40px 20px;
+	position: relative;
+	background-image: url("../images/product bg.png");
+    background-size: 500px;
+	border-radius: 10px;
+}
+
+
+/* pages for the products */
+.page-btn{
+	display: inline-block;
+	border: 2px solid rgb(167, 32, 32);
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	cursor: pointer;
+	position: relative;
+	left: 3.5%;
+	bottom: 0px;
+	margin: 3px;
+}
+
+.page-btn:hover{
+	background:rgb(167, 32, 32);
+	color: white;
+}
+
+/* products title */
+.p-heading {
+	margin:20px;
+	text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+.p-heading h2{
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-align: center;
+	font-size: 2rem;
+	color: #323543;
+}
+
+.p-heading font{
+	color: #a72020;
+}
+
+/* includes all products */
+.product-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 10px 0px;
+	width: 100%;
+	padding: 10px 10px 10px 10px;
+}
+
+/* includes separate products */
+.p-box{
+	width: 250px;
+	height: 360px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 4px;
+	position: relative;
+	margin: 10px 10px;
+}
+
+/* image of products */
+.p-box img{
+	height:180px;
+}
+
+
+/* name of products */
+.p-box p{
+	background-color: white;
+	color: #383838;
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin: 5px;
+}
+
+/* price of products */
+.price{
+	color:#000;
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", "serif";
+	font-size: 1.3rem;
+	text-decoration: none;
+	background-color: white;
+	padding: 10px;
+}
+
+/* buy button on products */
+.back-btn{
+	position: absolute;
+	width: 100px;
+	height: 30px;
+	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+	left:10%;
+	bottom: 95%;
+	transform: translateX(-50%);
+	border-radius: 30px;
+	color:#FFFFFF;
+	background-color: #2f2e41;
+}
+
+/* add button on products */
+.Add-btn{
+	position: absolute;
+	width: 100px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+	left:50%;
+	bottom: 10px;
+	transform: translateX(-50%);
+	border-radius: 30px;
+	color:#FFFFFF;
+	background-color: #2f2e41;
+	font-size: 1rem;
+}
+
+/* hover of items within the products */
+.p-box:hover{
+	box-shadow: 3px 3px 40px rgba(0,0,0,0.1);
+	background-color: #FFFFFF;
+}
+
+.Add-btn:hover{
+	color: #fff;
+	background-color:rgb(167, 32, 32);
+	transition: all ease 0.5s;
+}
+
+.back-btn:hover{
+	color: #fff;
+	background-color:rgb(167, 32, 32);
+	transition: all ease 0.5s;
+}
+

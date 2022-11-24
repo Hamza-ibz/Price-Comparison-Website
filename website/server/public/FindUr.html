@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FindUr Phone</title>
+	<!-- social medial icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Vue development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Axios library -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+
+    <div id="app">
+        <section class="H_main">
+            <!--logo-------->
+            <div class="logo"><img src="images/logo.png" alt="boosturtech" width="150" height="40"></div>
+            <!-----search bar---->
+            <div class="side-box">
+                <div class="search">
+                    <!--search icon--->
+                    <i class="fas fa-search"></i>
+                    
+        <input type="search" placeholder="Search" aria-label="Search" v-model.trim="search">
+        <button  v-on:click=loadAllPhone()>Search</button>
+                </div>
+            </div>
+            
+
+        </section>
+        <div class="p-heading">
+            <h2>Find<span id="ur">UR</span> favourite iPhone</h2>
+        </div>
+
+            <section class="product">
+                <div class="product-container">
+           <button class="back-btn" @click= "backPhone()">Back</button>
+
+    
+        <div v-bind:key="phone_comparison.id" v-for="phone_comparison in displayedphone_comparison">
+            <div class="p-box">
+            <img v-bind:src='phone_comparison.image_url'>
+            <button class="Add-btn" v-if="!isHidden" v-on:click="similar=phone_comparison.description" @click= "similarPhone()">compare</button>
+            <a v-else="isHidden" v-bind:href='phone_comparison.url'> <button class="Add-btn">visit site</button> </a>
+                
+                  <p v-if="isHidden">£{{phone_comparison.price}}</p>
+                  <p v-else="isHidden">{{phone_comparison.model}}</p>
+
+                  <p>{{phone_comparison.description}}</p>
+                  <p style="padding-bottom: 10px;">{{phone_comparison.site_name}}</p>
+            </div>
+            </div>
+
+    </div>
+    <div style="border: 2px solid rgb(167, 32, 32); width: 90%; position: relative; left: 6%; padding-bottom: 10px;">
+        <p style="text-align: center; font-weight: bold;">pages</p>
+    <button class= "page-btn" type="button" v-for="pageNumber in page_num" @click="page = pageNumber"
+        v-bind:key="pageNumber"> {{pageNumber}} </button>
+    </div>
+    
+</section>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                isActive: false,
+                isHidden: false,
+                similar_phones:[],
+                similar: "iphone",
+                phone_comparison: [],
+                search: "",
+                backSearch: "iphone",
+                count: 0,
+                page: 1,
+                items_per_page: 12,
+                pages: []
+            },
+            methods: {
+                async loadAllPhone() {
+                    let response = await axios.get('/phone_comparison/search/' + this.search.replace(/\s+/g, ''))
+                    this.phone_comparison = response.data.data
+                    this.count = response.data.count
+                    this.backSearch = this.search
+                    this.isHidden = false
+                },
+                async similarPhone() {
+                    let response = await axios.get('/phone_comparison/search_phone/' + this.similar.replace(/\s+/g, ''))
+                    this.phone_comparison = response.data.data
+                    this.count = response.data.count
+                    this.isHidden = true
+                },
+                async backPhone() {
+                    if(this.isHidden==false){
+                        this.backSearch = "";
+                        // this.backPhone()
+                    }
+                    let response = await axios.get('/phone_comparison/search/' + this.backSearch.replace(/\s+/g, ''))
+                    this.phone_comparison = response.data.data
+                    this.count = response.data.count
+                    this.isHidden = false
+                    if(this.phone_comparison==0){
+                        this.backSearch ="iphone"
+                        this.backPhone()
+                    }
+                    
+                },
+
+                setPages() {
+                    let numberOfPages = Math.ceil(this.phone_comparison.length / this.items_per_page);
+                    for (let index = 1; index <= numberOfPages; index++) {
+                        this.pages.push(index);
+                    }
+                },
+                paginate(phone_comparison) {
+                    let page = this.page;
+                    let perPage = this.items_per_page;
+                    let from = (page * perPage) - perPage;
+                    let to = (page * perPage);
+                    return phone_comparison.slice(from, to);
+                },
+            },
+            created() {
+                this.loadAllPhone();
+            },
+            mounted() {
+
+            },
+            watch: {
+                phone_comparison() {
+                    this.setPages();
+                }
+            },
+            computed: {
+                displayedphone_comparison() {
+                    return this.paginate(this.phone_comparison);
+                },
+                page_num() {
+
+                    return Math.ceil(this.count / 12);
+                },
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>
